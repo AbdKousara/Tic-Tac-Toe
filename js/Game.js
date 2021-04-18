@@ -9,11 +9,20 @@ export default class Game{
        }
 
        makeMove(i){
+              if(!this.isInProgrees()){
+                     return;
+              }
+
               if(this.board[i]){
                      return;
               }
+
+              if(!this.findWinningComintion()){
+                     this.nextTurn();
+              }
+              
               this.board[i] = this.turn;
-              this.nextTurn();
+              
 
        }
 
@@ -29,14 +38,19 @@ export default class Game{
                      [2, 4, 6]
               ]
 
-              for(const combinations of winningCombinations){
-                     const  [a, b, c] = combinations;
-                     if(this.board[a] && (this.board[a] === this.board[b] )){
-                            return combinations;
+              for(const combination of winningCombinations){
+                     const  [a, b, c] = combination;
+
+                     if(this.board[a] && (this.board[a] === this.board[b] && this.board[a] === this.board[c])){
+                            return combination;
                      }
-                     return null;
-                     
               }
+
+              return null;
+       }
+
+       isInProgrees(){
+              return !this.findWinningComintion() && this.board.includes(null);  
        }
 
        
