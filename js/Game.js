@@ -17,11 +17,11 @@ export default class Game{
                      return;
               }
 
+              this.board[i] = this.turn;
+              
               if(!this.findWinningComintion()){
                      this.nextTurn();
               }
-              
-              this.board[i] = this.turn;
               
 
        }
